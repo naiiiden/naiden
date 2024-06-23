@@ -1,0 +1,63 @@
+@import '../node_modules/naiden-css-reset/reset.scss';
+
+@font-face {
+    font-family: "Overused Grotesk";
+    src: url("/style/OverusedGrotesk-VF.ttf");
+    font-display: swap;
+}
+
+body {
+    font-family: "Overused Grotesk", Arial;
+    font-size: var(--min-font-size);
+    font-weight: 500;
+    color: #111111;
+    padding: clamp(.5rem, 2vw, 1.5rem);
+}
+
+::selection {
+    color: #18ff33 !important;
+}
+
+main {
+    line-height: 1;
+    display: grid;
+    gap: clamp(.5rem, 2vw, 2rem);
+}
+
+a {
+    cursor: crosshair;
+
+    &:is(:hover, :focus-visible, :active) {
+        outline: 0;
+        text-decoration: line-through;
+        color: #18ff33 !important;
+    }
+}
+
+html.lenis, html.lenis body {
+    height: auto;
+}
+  
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+    pointer-events: none;
+}
+
+@import './variables';
+
+#threejs-container {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+}

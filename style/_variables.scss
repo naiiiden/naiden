@@ -1,0 +1,9 @@
+:root {
+    --min-font-size: 6vw;
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --min-font-size: 3vw;
+    }
+}
