@@ -1,16 +1,17 @@
+import Lenis from "lenis";
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 console.log(GLTFLoader);
 
-// const lenis = new Lenis();
+const lenis = new Lenis();
 
-// function raf(time) {
-//   lenis.raf(time);
-//   requestAnimationFrame(raf);
-// }
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
 
-// requestAnimationFrame(raf);
+requestAnimationFrame(raf);
 
 function updateClock() {
   const now = new Date();
