@@ -1,4 +1,4 @@
-import Lenis from "lenis";
+import Lenis from "./node_modules/lenis/dist/lenis.mjs";
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
