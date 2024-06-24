@@ -1,6 +1,7 @@
 import Lenis from "lenis";
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RGBELoader } from "three/examples/jsm/Addons.js";
 
 console.log(GLTFLoader);
 
@@ -43,19 +44,24 @@ pointLight.castShadow = true;  // Enable shadows
 scene.add(pointLight);
 
 let model;
-const loader = new GLTFLoader();
-loader.load('untitled.glb', function (gltf) {
-    model = gltf.scene;
-    model.traverse(function (node) {
-      if (node.isMesh) {
-        node.castShadow = true;
-        node.receiveShadow = true;
-      }
-    });
-    scene.add(model);
-    resizeModel(); 
-}, undefined, function (error) {
-    console.error(error);
+new RGBELoader().load('test.hdr', function (texture) {
+  texture.mapping = THREE.EquirectangularReflectionMapping;
+  scene.environment = texture;
+  
+  const loader = new GLTFLoader();
+  loader.load('untitled.glb', function (gltf) {
+      model = gltf.scene;
+      model.traverse(function (node) {
+        if (node.isMesh) {
+          node.castShadow = true;
+          node.receiveShadow = true;
+        }
+      });
+      scene.add(model);
+      resizeModel(); 
+  }, undefined, function (error) {
+      console.error(error);
+  });
 });
 
 camera.position.z = 2;
