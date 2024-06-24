@@ -3,8 +3,6 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RGBELoader } from "three/examples/jsm/Addons.js";
 
-console.log(GLTFLoader);
-
 const lenis = new Lenis();
 
 function raf(time) {
@@ -44,7 +42,7 @@ pointLight.castShadow = true;  // Enable shadows
 scene.add(pointLight);
 
 let model;
-new RGBELoader().load('test.hdr', function (texture) {
+new RGBELoader().load('texture.hdr', function (texture) {
   texture.mapping = THREE.EquirectangularReflectionMapping;
   scene.environment = texture;
   
@@ -55,6 +53,10 @@ new RGBELoader().load('test.hdr', function (texture) {
         if (node.isMesh) {
           node.castShadow = true;
           node.receiveShadow = true;
+          node.material = new THREE.MeshPhysicalMaterial({
+            metalness: 1,
+            roughness: 0,
+          })
         }
       });
       scene.add(model);
