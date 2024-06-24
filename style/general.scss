@@ -8,7 +8,7 @@
 
 body {
     font-family: "Overused Grotesk", Arial;
-    font-size: var(--min-font-size);
+    font-size: clamp(1.875rem, 6vw, 6.25rem);
     font-weight: 500;
     color: #111111;
     padding: clamp(.5rem, 2vw, 1.5rem);
@@ -21,7 +21,7 @@ body {
 main {
     line-height: 1;
     display: grid;
-    gap: clamp(.5rem, 2vw, 2rem);
+    gap: clamp(.5rem, 3vw, 4rem);
 }
 
 a {
@@ -55,8 +55,6 @@ html.lenis, html.lenis body {
 .lenis.lenis-smooth iframe {
     pointer-events: none;
 }
-
-@import './variables';
 
 #threejs-container {
     position: fixed;
