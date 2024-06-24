@@ -30,9 +30,9 @@ setInterval(updateClock, 1000);
 const container = document.getElementById('threejs-container');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
-renderer.setClearColor(0xffffff, 1);
+// renderer.setClearColor(0xffffff, 1);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;  // Enable shadow maps
 container.appendChild(renderer.domElement);

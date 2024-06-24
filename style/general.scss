@@ -26,6 +26,8 @@ main {
 
 a {
     cursor: crosshair;
+    position: relative;
+    z-index: 1;
 
     &:is(:hover, :focus-visible, :active) {
         outline: 0;
@@ -58,6 +60,5 @@ html.lenis, html.lenis body {
 
 #threejs-container {
     position: fixed;
-    z-index: -1;
     inset: 0;
 }
