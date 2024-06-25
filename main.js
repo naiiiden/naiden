@@ -76,15 +76,23 @@ function resizeModel() {
 
 let mouseX, mouseY;
 
-window.addEventListener('mousemove', (event) => {
-  mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-  mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+function rotateModelOnMove(event) {
+  if (event.touches) {
+    mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+  } else {
+    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+  }
 
   if (model) {
     model.rotation.x = mouseY * Math.PI / 1;
     model.rotation.y = mouseX * Math.PI / 1;
   }
-});
+}
+
+window.addEventListener('touchmove', rotateModelOnMove);
+window.addEventListener('mousemove', rotateModelOnMove);
 
 function animate() {
   requestAnimationFrame(animate);
