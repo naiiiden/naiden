@@ -47,6 +47,7 @@ new RGBELoader().load('texture.hdr', function (texture) {
           node.material = new THREE.MeshPhysicalMaterial({
             metalness: 1,
             roughness: 0,
+            side: THREE.DoubleSide
           })
         }
       });
@@ -57,7 +58,7 @@ new RGBELoader().load('texture.hdr', function (texture) {
   });
 });
 
-camera.position.z = 1.5;
+camera.position.z = 1.375;
 
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
