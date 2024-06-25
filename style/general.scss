@@ -58,5 +58,7 @@ html.lenis, html.lenis body {
 
 #threejs-container {
     position: fixed;
+    z-index: -1;
     inset: 0;
+    filter: blur(2px);
 }
