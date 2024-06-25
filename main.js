@@ -22,7 +22,6 @@ function updateClock() {
 
 updateClock();
 
-// Update the clock every second
 setInterval(updateClock, 1000);
 
 const container = document.getElementById('threejs-container');
@@ -75,10 +74,15 @@ function resizeModel() {
   }
 }
 
+let mouseX, mouseY;
+
 window.addEventListener('mousemove', (event) => {
+  mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+  mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+
   if (model) {
-    model.rotation.y = (event.clientX / window.innerWidth);
-    model.rotation.x = (event.clientY / window.innerHeight);
+    model.rotation.x = mouseY * Math.PI / 1;
+    model.rotation.y = mouseX * Math.PI / 1;
   }
 });
 
