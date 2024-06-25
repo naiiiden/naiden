@@ -80,10 +80,10 @@ let mouseX, mouseY;
 function rotateModelOnMove(event) {
   if (event.touches) {
     mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-    mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+    mouseY = (event.touches[0].clientY / window.innerHeight) * 2 + 1;
   } else {
     mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    mouseY = (event.clientY / window.innerHeight) * 2 + 1;
   }
 
   if (model) {
