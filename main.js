@@ -35,12 +35,6 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;  // Enable shadow maps
 container.appendChild(renderer.domElement);
 
-// Add a point light
-const pointLight = new THREE.PointLight(0xffffff, 1);  // Increased intensity
-pointLight.position.set(10, 10, 0);
-pointLight.castShadow = true;  // Enable shadows
-scene.add(pointLight);
-
 let model;
 new RGBELoader().load('texture.hdr', function (texture) {
   texture.mapping = THREE.EquirectangularReflectionMapping;
