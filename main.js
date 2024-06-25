@@ -66,10 +66,11 @@ new RGBELoader().load('texture.hdr', function (texture) {
   });
 });
 
-camera.position.z = 2;
+camera.position.z = 1.5;
 
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
+    console.log(camera.aspect);
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     resizeModel();
