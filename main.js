@@ -30,9 +30,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
-// renderer.setClearColor(0xffffff, 1);
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.shadowMap.enabled = true;  // Enable shadow maps
 container.appendChild(renderer.domElement);
 
 let model;
@@ -76,6 +74,13 @@ function resizeModel() {
     model.scale.set(scale, scale, scale);
   }
 }
+
+window.addEventListener('mousemove', (event) => {
+  if (model) {
+    model.rotation.y = (event.clientX / window.innerWidth);
+    model.rotation.x = (event.clientY / window.innerHeight);
+  }
+});
 
 function animate() {
   requestAnimationFrame(animate);
