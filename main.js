@@ -26,7 +26,7 @@ new RGBELoader().load('texture.hdr', function (texture) {
   scene.environment = texture;
   
   const loader = new GLTFLoader();
-  loader.load('untitled.glb', function (gltf) {
+  loader.load('untitledcompressed.glb', function (gltf) {
       model = gltf.scene;
       model.traverse(function (node) {
         if (node.isMesh) {
