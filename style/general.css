@@ -99,22 +99,22 @@ body {
   color: #18ff33 !important;
 }
 
-.fe {
+header {
   height: 100vh;
   text-transform: uppercase;
   display: grid;
   place-content: center;
 }
-.fe h1 {
+header h1 {
   font-size: 1em;
   font-weight: 600;
   line-height: 1;
 }
 
-main {
+main, .main-copy {
   line-height: 0.9;
   display: grid;
-  gap: clamp(1rem, 3vw, 4rem);
+  gap: clamp(1rem, 5vw, 6rem);
   max-width: 1700px;
   margin: auto;
   padding: clamp(0.5rem, 2vw, 1.5rem);
@@ -155,5 +155,4 @@ html.lenis, html.lenis body {
   position: fixed;
   z-index: -1;
   inset: 0;
-  filter: blur(1px);
 }/*# sourceMappingURL=general.css.map */

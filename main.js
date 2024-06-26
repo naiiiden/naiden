@@ -88,3 +88,17 @@ function animate() {
   renderer.render(scene, camera);
 }
 animate();
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const mainCopy = document.querySelector('.main-copy');
+      const clone = mainCopy.cloneNode(true);
+      document.body.appendChild(clone);
+      observer.unobserve(mainCopy);
+      observer.observe(clone);
+    }
+  });
+}, { threshold: .6 });
+
+observer.observe(document.querySelector('.main-copy'));
