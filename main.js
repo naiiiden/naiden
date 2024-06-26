@@ -89,16 +89,17 @@ function animate() {
 }
 animate();
 
+const mainCopy = document.querySelector('.main-copy');
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      const mainCopy = document.querySelector('.main-copy');
       const clone = mainCopy.cloneNode(true);
-      document.body.appendChild(clone);
+      document.querySelector(".main-wrapper").appendChild(clone);
       observer.unobserve(mainCopy);
       observer.observe(clone);
     }
   });
 }, { threshold: .6 });
 
-observer.observe(document.querySelector('.main-copy'));
+observer.observe(mainCopy);

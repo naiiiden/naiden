@@ -111,13 +111,17 @@ header h1 {
   line-height: 1;
 }
 
-main, .main-copy {
+.main-wrapper {
+  display: grid;
+  gap: clamp(1rem, 5vw, 6rem);
+}
+.main-wrapper .main {
   line-height: 0.9;
   display: grid;
   gap: clamp(1rem, 5vw, 6rem);
   max-width: 1700px;
   margin: auto;
-  padding: clamp(0.5rem, 2vw, 1.5rem);
+  padding: 0 clamp(0.5rem, 2vw, 1.5rem);
 }
 
 a {

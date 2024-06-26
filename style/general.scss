@@ -31,13 +31,18 @@ header {
     }
 }
 
-main, .main-copy {
-    line-height: .9;
+.main-wrapper {
     display: grid;
     gap: clamp(1rem, 5vw, 6rem);
-    max-width: 1700px;
-    margin: auto;
-    padding: clamp(.5rem, 2vw, 1.5rem);
+    
+    .main {
+        line-height: .9;
+        display: grid;
+        gap: clamp(1rem, 5vw, 6rem);
+        max-width: 1700px;
+        margin: auto;
+        padding: 0 clamp(.5rem, 2vw, 1.5rem);
+    }
 }
 
 a {
