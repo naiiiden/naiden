@@ -78,13 +78,8 @@ html {
     scroll-behavior: auto !important;
   }
 }
-@font-face {
-  font-family: "Overused Grotesk";
-  src: url("/style/OverusedGrotesk-VF.ttf");
-  font-display: swap;
-}
 body {
-  font-family: "Overused Grotesk", Arial;
+  font-family: Helvetica, Arial;
   font-size: clamp(1.75rem, 6vw, 6rem);
   font-weight: 600;
   text-align: center;
@@ -101,20 +96,8 @@ body {
   color: #18ff33 !important;
 }
 
-header {
-  height: 100vh;
-  text-transform: uppercase;
-  display: grid;
-  place-content: center;
-}
-header h1 {
-  font-size: 1em;
-  font-weight: 600;
-  line-height: 1;
-}
-
 .main {
-  line-height: 0.9;
+  line-height: 1;
   display: grid;
   gap: clamp(1rem, 5vw, 6rem);
   max-width: 1700px;
