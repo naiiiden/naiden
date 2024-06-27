@@ -159,20 +159,17 @@ html.lenis, html.lenis body {
   inset: 0;
 }
 
+.fold-content {
+  display: grid;
+  gap: clamp(1rem, 5vw, 6rem);
+}
+
 .screen {
   position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
   height: 100vh;
-}
-
-.fold-scroller {
-  height: 100%;
-}
-
-.fold-content {
-  pointer-events: all;
 }
 
 .fold-size-fix {
@@ -192,22 +189,6 @@ html.lenis, html.lenis body {
   display: none;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: calc(100vh - 13rem);
-  position: relative;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-@media screen and (min-width: 53em) {
-  .content {
-    height: 100vh;
-    justify-content: center;
-  }
-}
 .fold {
   overflow: hidden;
   width: 100vw;
@@ -217,7 +198,7 @@ html.lenis, html.lenis body {
 
 .wrapper-3d {
   position: relative;
-  perspective: 250px;
+  perspective: 350px;
   transform-style: preserve-3d;
 }
 
@@ -237,10 +218,7 @@ html.lenis, html.lenis body {
   position: absolute;
   transform-origin: top center;
   transform: translateZ(0px) translate3d(0, 80vh, 0) rotateX(120deg) scale3d(1, 1.002004008, 1);
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  inset: 0 0 0 0;
 }
 
 .fold-size-fix {
@@ -252,10 +230,7 @@ html.lenis, html.lenis body {
   position: absolute;
   transform-origin: bottom center;
   transform: translateZ(0px) translate3d(0, -80vh, 0) rotateX(-120deg) scale3d(1, 1.002004008, 1);
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  inset: 0 0 0 0;
 }
 
 .fold-after .fold-scroller {
