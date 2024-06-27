@@ -56,9 +56,13 @@ window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-let mouseX, mouseY;
+let mouseX = 0, mouseY = 0, modelRotationX = 0, modelRotationY = 0, lastMoveEventTime = 0;
 
 function rotateModelOnMove(event) {
+  const now = Date.now();
+  if (now - lastMoveEventTime < 10) return;
+  lastMoveEventTime = now;
+
   if (event.touches) {
     mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
     mouseY = (event.touches[0].clientY / window.innerHeight) * 2 + 1;
@@ -67,9 +71,12 @@ function rotateModelOnMove(event) {
     mouseY = (event.clientY / window.innerHeight) * 2 + 1;
   }
 
+  modelRotationX = mouseY * Math.PI / 1;
+  modelRotationY = mouseX * Math.PI / 1;
+
   if (model) {
-    model.rotation.x = mouseY * Math.PI / 1;
-    model.rotation.y = mouseX * Math.PI / 1;
+    model.rotation.x += (modelRotationX - model.rotation.x) * 0.1;
+    model.rotation.y += (modelRotationY - model.rotation.y) * 0.1;
   }
 }
 
