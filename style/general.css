@@ -169,7 +169,7 @@ html.lenis, html.lenis body {
 }
 
 .wrapper-3d {
-  perspective: 350px;
+  perspective: 250px;
   transform-style: preserve-3d;
 }
 
