@@ -12,6 +12,8 @@ body {
     font-weight: 600;
     text-align: center;
     color: #111111;
+    position: relative;
+    overflow-x: hidden;
 }
 
 ::selection {
@@ -31,18 +33,13 @@ header {
     }
 }
 
-.main-wrapper {
+.main {
+    line-height: .9;
     display: grid;
     gap: clamp(1rem, 5vw, 6rem);
-    
-    .main {
-        line-height: .9;
-        display: grid;
-        gap: clamp(1rem, 5vw, 6rem);
-        max-width: 1700px;
-        margin: auto;
-        padding: 0 clamp(.5rem, 2vw, 1.5rem);
-    }
+    max-width: 1700px;
+    margin: auto;
+    padding: 0 clamp(.5rem, 2vw, 1.5rem);
 }
 
 a {
@@ -81,4 +78,113 @@ html.lenis, html.lenis body {
     position: fixed;
     z-index: -1;
     inset: 0;
+}
+
+.screen {
+	position: fixed;
+    inset: 0;
+	display: flex;
+	align-items: center;
+	height: 100vh;
+}
+
+.fold-scroller {
+	height: 100%;
+}
+
+.fold-content {
+	pointer-events: all;
+	// width: 100%;
+}
+
+.fold-size-fix {
+	width: 100%;
+	height: 100%;
+}
+
+.fold-before .fold-size-fix {
+	transform-origin: bottom center;
+}
+
+.fold-after .fold-size-fix {
+	transform-origin: top center;
+}
+
+#base-content {
+	display: none;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: calc(100vh - 13rem);
+	position: relative;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+@media screen and (min-width: 53em) {
+	.content {
+		height: 100vh;
+		justify-content: center;
+	}
+}
+
+.fold {
+	overflow: hidden;
+	width: 100vw;
+	height: 80vh;
+	will-change: transform;
+}
+
+.wrapper-3d {
+	position: relative;
+	perspective: 250px;
+	transform-style: preserve-3d;
+}
+
+.fold-scroller {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+
+.fold-center {
+	transform-origin: center center;
+	transform: translateZ(0px) translate3d(0, 0, 0) rotateX(0) scale3d(1, 1.002004008016032, 1);
+}
+
+.fold-after {
+	position: absolute;
+	transform-origin: top center;
+	transform: translateZ(0px) translate3d(0, 80vh, 0) rotateX(120deg) scale3d(1, 1.002004008016032, 1);
+	right: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.fold-size-fix {
+	transform-origin: center center;
+	transform: scaleY(0.998);
+}
+
+.fold-before {
+	position: absolute;
+	transform-origin: bottom center;
+	transform: translateZ(0px) translate3d(0, -80vh, 0) rotateX(-120deg) scale3d(1, 1.002004008016032, 1);
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.fold-after .fold-scroller {
+	transform: translateY(-100%);
+}
+
+.fold-before .fold-scroller {
+	transform: translateY(100%);
 }
