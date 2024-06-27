@@ -40,28 +40,19 @@ new RGBELoader().load('texture.hdr', function (texture) {
         }
       });
       scene.add(model);
-      resizeModel(); 
   }, undefined, function (error) {
       console.error(error);
   });
 });
 
-camera.position.z = 1.375;
+camera.position.z = 1;
 
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     console.log(camera.aspect);
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    resizeModel();
 });
-
-function resizeModel() {
-  if (model) {
-    const scale = Math.min(window.innerWidth / 1000, window.innerHeight / 1000);
-    model.scale.set(scale, scale, scale);
-  }
-}
 
 let mouseX, mouseY;
 
