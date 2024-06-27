@@ -139,7 +139,6 @@ html.lenis, html.lenis body {
 #threejs-container {
   position: fixed;
   z-index: -1;
-  inset: 0;
 }
 
 .fold-content {
@@ -152,20 +151,10 @@ html.lenis, html.lenis body {
   inset: 0;
   display: flex;
   align-items: center;
-  height: 100vh;
 }
 
 .fold-size-fix {
-  width: 100%;
   height: 100%;
-}
-
-.fold-before .fold-size-fix {
-  transform-origin: bottom center;
-}
-
-.fold-after .fold-size-fix {
-  transform-origin: top center;
 }
 
 #base-content {
@@ -180,21 +169,12 @@ html.lenis, html.lenis body {
 }
 
 .wrapper-3d {
-  position: relative;
   perspective: 350px;
   transform-style: preserve-3d;
 }
 
 .fold-scroller {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
   height: 100%;
-}
-
-.fold-center {
-  transform-origin: center center;
-  transform: translateZ(0px) translate3d(0, 0, 0) rotateX(0) scale3d(1, 1.002004008, 1);
 }
 
 .fold-after {
@@ -202,11 +182,6 @@ html.lenis, html.lenis body {
   transform-origin: top center;
   transform: translateZ(0px) translate3d(0, 80vh, 0) rotateX(120deg) scale3d(1, 1.002004008, 1);
   inset: 0 0 0 0;
-}
-
-.fold-size-fix {
-  transform-origin: center center;
-  transform: scaleY(0.998);
 }
 
 .fold-before {
