@@ -78,10 +78,14 @@ html {
     scroll-behavior: auto !important;
   }
 }
+@font-face {
+  font-family: "PPNeueMontreal-Medium";
+  src: url("/public/PPNeueMontreal-Medium.otf");
+  font-display: swap;
+}
 body {
-  font-family: Helvetica, Arial;
-  font-size: clamp(1.75rem, 6vw, 6rem);
-  font-weight: 600;
+  font-family: "PPNeueMontreal-Medium", Arial;
+  font-size: clamp(1.875rem, 6vw, 6rem);
   overflow-x: hidden;
 }
 
@@ -135,7 +139,6 @@ html.lenis, html.lenis body {
 
 #threejs-container {
   position: fixed;
-  z-index: -1;
 }
 
 .fold-content {

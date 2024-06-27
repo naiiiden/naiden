@@ -35,8 +35,10 @@ new RGBELoader().load('texture.hdr', function (texture) {
           node.material = new THREE.MeshPhysicalMaterial({
             metalness: 1,
             roughness: 0,
-            side: THREE.DoubleSide
-          })
+            transparent: true,
+            opacity: 1,
+            side: THREE.DoubleSide,
+          });
         }
       });
       scene.add(model);
