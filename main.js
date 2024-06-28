@@ -1,6 +1,6 @@
 import Lenis from "lenis";
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RGBELoader } from "three/examples/jsm/Addons.js";
 
 const lenis = new Lenis();
@@ -12,27 +12,36 @@ function raf(time) {
 
 requestAnimationFrame(raf);
 
-const container = document.getElementById('threejs-container');
+const container = document.getElementById("threejs-container");
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 container.appendChild(renderer.domElement);
 
+camera.position.set(0, 1, 1);
+
 let model;
-new RGBELoader().load('texture.hdr', function (texture) {
+new RGBELoader().load("texture.hdr", function (texture) {
   texture.mapping = THREE.EquirectangularReflectionMapping;
   scene.environment = texture;
-  
+
   const loader = new GLTFLoader();
-  loader.load('untitledcompressed.glb', function (gltf) {
+  loader.load(
+    "untitledcompressed.glb",
+    function (gltf) {
       model = gltf.scene;
       model.traverse(function (node) {
         if (node.isMesh) {
           node.castShadow = true;
           node.receiveShadow = true;
-          node.material = new THREE.MeshPhysicalMaterial({
+          node.material = new THREE.MeshStandardMaterial({
             metalness: 1,
             roughness: 0,
             transparent: true,
@@ -41,47 +50,82 @@ new RGBELoader().load('texture.hdr', function (texture) {
           });
         }
       });
+
+      const box = new THREE.Box3().setFromObject(model);
+      const boxSize = box.getSize(new THREE.Vector3()).length();
+      const boxCenter = box.getCenter(new THREE.Vector3());
+
+      frameArea(boxSize * 0.75, boxSize, boxCenter, camera);
       scene.add(model);
-  }, undefined, function (error) {
+    },
+    undefined,
+    function (error) {
       console.error(error);
-  });
+    }
+  );
 });
 
-camera.position.z = 1;
+function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
+  const halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5;
+  const halfFovY = THREE.MathUtils.degToRad(camera.fov * 0.5);
+  const distance = halfSizeToFitOnScreen / Math.tan(halfFovY);
 
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    console.log(camera.aspect);
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+  const direction = new THREE.Vector3()
+    .subVectors(camera.position, boxCenter)
+    .multiply(new THREE.Vector3(1, 0, 1))
+    .normalize();
+
+  camera.position.copy(direction.multiplyScalar(distance).add(boxCenter));
+  camera.updateProjectionMatrix();
+  camera.lookAt(boxCenter.x, boxCenter.y, boxCenter.z);
+}
+
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  console.log(camera.aspect);
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-let mouseX = 0, mouseY = 0, modelRotationX = 0, modelRotationY = 0, lastMoveEventTime = 0;
+let targetRotation = new THREE.Vector2();
+let currentRotation = new THREE.Vector2();
 
 function rotateModelOnMove(event) {
-  const now = Date.now();
-  if (now - lastMoveEventTime < 10) return;
-  lastMoveEventTime = now;
-
+  let clientX, clientY;
   if (event.touches) {
-    mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-    mouseY = (event.touches[0].clientY / window.innerHeight) * 2 + 1;
+    clientX = event.touches[0].clientX;
+    clientY = event.touches[0].clientY;
   } else {
-    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-    mouseY = (event.clientY / window.innerHeight) * 2 + 1;
+    clientX = event.clientX;
+    clientY = event.clientY;
   }
 
-  modelRotationX = mouseY * Math.PI / 1;
-  modelRotationY = mouseX * Math.PI / 1;
+  const canvas = renderer.domElement;
+  const halfWidth = canvas.clientWidth / 2;
+  const halfHeight = canvas.clientHeight / 2;
+
+  targetRotation.x = ((clientY - halfHeight) / halfHeight) * Math.PI;
+  targetRotation.y = ((clientX - halfWidth) / halfWidth) * Math.PI;
 
   if (model) {
-    model.rotation.x += (modelRotationX - model.rotation.x) * 0.1;
-    model.rotation.y += (modelRotationY - model.rotation.y) * 0.1;
+    currentRotation.x = THREE.MathUtils.lerp(
+      currentRotation.x,
+      targetRotation.x,
+      0.1
+    );
+    currentRotation.y = THREE.MathUtils.lerp(
+      currentRotation.y,
+      targetRotation.y,
+      0.1
+    );
+
+    model.rotation.x = currentRotation.x;
+    model.rotation.y = currentRotation.y;
   }
 }
 
-window.addEventListener('touchmove', rotateModelOnMove);
-window.addEventListener('mousemove', rotateModelOnMove);
+document.body.addEventListener("touchmove", rotateModelOnMove);
+document.body.addEventListener("mousemove", rotateModelOnMove);
 
 function animate() {
   requestAnimationFrame(animate);
@@ -89,7 +133,7 @@ function animate() {
 }
 animate();
 
-(function() {
+(function () {
   const folds = Array.from(document.getElementsByClassName("fold"));
   const baseContent = document.getElementById("base-content");
   const mainCopyContent = document.querySelector(".main-copy");
@@ -97,7 +141,7 @@ animate();
   let state = {
     disposed: false,
     targetScroll: 0,
-    scroll: 0
+    scroll: 0,
   };
 
   function lerp(current, target, speed = 0.1, limit = 0.001) {
@@ -154,9 +198,15 @@ animate();
     if (state.disposed) return;
 
     // Calculate the scroll based on how much the content is outside the centerFold
-    document.body.style.height = scrollers[0].children[0].clientHeight - centerFold.clientHeight + window.innerHeight + "px";
+    document.body.style.height =
+      scrollers[0].children[0].clientHeight -
+      centerFold.clientHeight +
+      window.innerHeight +
+      "px";
 
-    state.targetScroll = -(document.documentElement.scrollTop || document.body.scrollTop);
+    state.targetScroll = -(
+      document.documentElement.scrollTop || document.body.scrollTop
+    );
     state.scroll += lerp(state.scroll, state.targetScroll, 0.1, 0.0001);
 
     updateStyles(state.scroll, scrollers);
@@ -165,13 +215,14 @@ animate();
     const scrollableHeight = scrollers[0].children[0].clientHeight;
     const scrollPosition = -state.scroll + window.innerHeight;
 
-    if (scrollPosition >= scrollableHeight - 100) { // 100 pixels before the end
+    if (scrollPosition >= scrollableHeight - 100) {
+      // 100 pixels before the end
       appendMainCopyContent(scrollers);
     }
 
     requestAnimationFrame(tick);
   };
 
-  document.body.classList.remove('loading');
+  document.body.classList.remove("loading");
   tick();
 })();
