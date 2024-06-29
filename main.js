@@ -34,7 +34,7 @@ new RGBELoader().load("texture.hdr", function (texture) {
 
   const loader = new GLTFLoader();
   loader.load(
-    "untitledcompressed.glb",
+    "untitledcompressed3.glb",
     function (gltf) {
       model = gltf.scene;
       model.traverse(function (node) {
@@ -42,10 +42,10 @@ new RGBELoader().load("texture.hdr", function (texture) {
           node.castShadow = true;
           node.receiveShadow = true;
           node.material = new THREE.MeshStandardMaterial({
-            metalness: 1,
+            metalness: 0,
             roughness: 0,
             transparent: true,
-            opacity: 1,
+            opacity: .7,
             side: THREE.DoubleSide,
           });
         }
@@ -55,7 +55,7 @@ new RGBELoader().load("texture.hdr", function (texture) {
       const boxSize = box.getSize(new THREE.Vector3()).length();
       const boxCenter = box.getCenter(new THREE.Vector3());
 
-      frameArea(boxSize * 0.75, boxSize, boxCenter, camera);
+      frameArea(boxSize * 0.5, boxSize, boxCenter, camera);
       scene.add(model);
     },
     undefined,
