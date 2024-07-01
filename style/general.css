@@ -149,7 +149,6 @@ html.lenis, html.lenis body {
 
 #threejs-container {
   position: fixed;
-  filter: grayscale(1);
 }
 
 .fold-content {
