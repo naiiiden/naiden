@@ -1,7 +1,6 @@
 import Lenis from "lenis";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { RGBELoader } from "three/examples/jsm/Addons.js";
 
 const lenis = new Lenis();
 
@@ -28,42 +27,37 @@ container.appendChild(renderer.domElement);
 camera.position.set(0, 1, 1);
 
 let model;
-new RGBELoader().load("texture.hdr", function (texture) {
-  texture.mapping = THREE.EquirectangularReflectionMapping;
-  scene.environment = texture;
+const loader = new GLTFLoader();
+loader.load(
+  "untitledcompressed.glb",
+  function (gltf) {
+    model = gltf.scene;
+    model.traverse(function (node) {
+      if (node.isMesh) {
+        node.castShadow = true;
+        node.receiveShadow = true;
+        node.material = new THREE.MeshStandardMaterial({
+          metalness: 0,
+          roughness: 0,
+          transparent: true,
+          opacity: .7,
+          side: THREE.DoubleSide,
+        });
+      }
+    });
 
-  const loader = new GLTFLoader();
-  loader.load(
-    "untitledcompressed.glb",
-    function (gltf) {
-      model = gltf.scene;
-      model.traverse(function (node) {
-        if (node.isMesh) {
-          node.castShadow = true;
-          node.receiveShadow = true;
-          node.material = new THREE.MeshStandardMaterial({
-            metalness: 0,
-            roughness: 0,
-            transparent: true,
-            opacity: .7,
-            side: THREE.DoubleSide,
-          });
-        }
-      });
+    const box = new THREE.Box3().setFromObject(model);
+    const boxSize = box.getSize(new THREE.Vector3()).length();
+    const boxCenter = box.getCenter(new THREE.Vector3());
 
-      const box = new THREE.Box3().setFromObject(model);
-      const boxSize = box.getSize(new THREE.Vector3()).length();
-      const boxCenter = box.getCenter(new THREE.Vector3());
-
-      frameArea(boxSize * 0.5, boxSize, boxCenter, camera);
-      scene.add(model);
-    },
-    undefined,
-    function (error) {
-      console.error(error);
-    }
-  );
-});
+    frameArea(boxSize * 0.5, boxSize, boxCenter, camera);
+    scene.add(model);
+  },
+  undefined,
+  function (error) {
+    console.error(error);
+  }
+);
 
 function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
   const halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5;
@@ -126,6 +120,13 @@ function rotateModelOnMove(event) {
 
 document.body.addEventListener("touchmove", rotateModelOnMove);
 document.body.addEventListener("mousemove", rotateModelOnMove);
+
+const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+hemisphereLight.position.set(0, 20, 0);
+scene.add(hemisphereLight);
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+scene.add(ambientLight);
 
 function animate() {
   requestAnimationFrame(animate);
