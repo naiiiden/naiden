@@ -80,7 +80,7 @@ html {
 }
 @font-face {
   font-family: "PPNeueMontreal-Medium";
-  src: url("/public/PPNeueMontreal-Medium.otf");
+  src: url("/PPNeueMontreal-Medium.otf");
   font-display: swap;
 }
 body {
@@ -103,6 +103,10 @@ body {
   gap: clamp(1rem, 5vw, 6rem);
   padding: 0 clamp(0.5rem, 2vw, 1.5rem);
   mix-blend-mode: difference;
+}
+.main span {
+  font-size: larger;
+  text-transform: uppercase;
 }
 
 ::-webkit-scrollbar {
