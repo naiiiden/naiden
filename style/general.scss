@@ -9,7 +9,7 @@
 body {
     font-family: "PPNeueMontreal-Medium", Arial;
     font-size: clamp(1.875rem, 6vw, 6rem);
-    transition: color .5s linear;
+    transition: color .3s linear;
 }
 
 ::selection {
@@ -35,7 +35,7 @@ body {
 
 .hovered {
     color: #f8f8f8;
-    transition: color .5s ease-in;
+    transition: color .3s ease-in;
 }
 
 a {

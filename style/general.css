@@ -86,7 +86,7 @@ html {
 body {
   font-family: "PPNeueMontreal-Medium", Arial;
   font-size: clamp(1.875rem, 6vw, 6rem);
-  transition: color 0.5s linear;
+  transition: color 0.3s linear;
 }
 
 ::-moz-selection {
@@ -115,7 +115,7 @@ body {
 
 .hovered {
   color: #f8f8f8;
-  transition: color 0.5s ease-in;
+  transition: color 0.3s ease-in;
 }
 
 a {
