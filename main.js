@@ -34,7 +34,7 @@ new RGBELoader().load("texture.hdr", function (texture) {
 
   const loader = new GLTFLoader();
   loader.load(
-    "untitledcompressed3.glb",
+    "untitledcompressed.glb",
     function (gltf) {
       model = gltf.scene;
       model.traverse(function (node) {
@@ -226,3 +226,12 @@ animate();
   document.body.classList.remove("loading");
   tick();
 })();
+
+document.querySelectorAll("a").forEach((a) => {
+  a.addEventListener("mouseenter", function() {
+    document.body.classList.toggle("hovered");
+  });
+  a.addEventListener("mouseleave", function() {
+    document.body.classList.toggle("hovered");
+  });
+});

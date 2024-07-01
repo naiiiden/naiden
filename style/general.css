@@ -86,6 +86,7 @@ html {
 body {
   font-family: "PPNeueMontreal-Medium", Arial;
   font-size: clamp(1.875rem, 6vw, 6rem);
+  transition: color 0.5s linear;
 }
 
 ::-moz-selection {
@@ -101,10 +102,16 @@ body {
   display: grid;
   gap: clamp(1rem, 5vw, 6rem);
   padding: 0 clamp(0.5rem, 2vw, 1.5rem);
+  mix-blend-mode: difference;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.hovered {
+  color: #f8f8f8;
+  transition: color 0.5s ease-in;
 }
 
 a {
@@ -138,6 +145,7 @@ html.lenis, html.lenis body {
 
 #threejs-container {
   position: fixed;
+  filter: grayscale(1);
 }
 
 .fold-content {
