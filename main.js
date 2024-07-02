@@ -209,21 +209,24 @@ function tick() {
     appendMainCopyContent(scrollers);
   }
 
+  addLinksHoverEffect();
+
   requestAnimationFrame(tick);
 }
 
 function init() {
   scrollers = setContent(baseContent);
-  document.body.classList.remove("loading");
   tick();
 }
 init();
 
-document.querySelectorAll("a").forEach((a) => {
-  a.addEventListener("mouseenter", function() {
-    document.body.classList.toggle("hovered");
+function addLinksHoverEffect() {
+  document.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("mouseenter", function() {
+      document.body.classList.add("hovered");
+    });
+    a.addEventListener("mouseleave", function() {
+      document.body.classList.remove("hovered");
+    });
   });
-  a.addEventListener("mouseleave", function() {
-    document.body.classList.toggle("hovered");
-  });
-});
+}
