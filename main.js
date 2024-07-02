@@ -200,6 +200,8 @@ function updateBodyHeight() {
     centerFold.clientHeight +
     window.innerHeight +
     "px";
+
+  addLinksHoverEffect();
 }
 
 function handleScroll() {
