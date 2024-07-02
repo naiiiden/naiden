@@ -33,7 +33,7 @@ body {
 }
 
 .hovered {
-    color: #f8f8f8;
+    color: #f5f5f5;
     transition: color .3s ease-in;
 }
 
@@ -42,7 +42,6 @@ a {
 
     &:is(:hover, :focus-visible, :active) {
         outline: 0;
-        text-decoration: line-through;
         color: #18ff33 !important;
     }
 }
