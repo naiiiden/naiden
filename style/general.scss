@@ -1,5 +1,15 @@
 @import '../node_modules/naiden-css-reset/reset.scss';
 
+:root {
+    --foldsHeight: 70vh;
+}
+
+@media screen and (min-width: 1024px) {
+    :root {
+        --foldsHeight: 65vh;
+    } 
+}
+
 @font-face {
     font-family: "PPNeueMontreal-Medium";
     src: url("/PPNeueMontreal-Medium.otf");
@@ -8,8 +18,7 @@
 
 body {
     font-family: "PPNeueMontreal-Medium", Arial;
-    font-size: clamp(1.875rem, 6vw, 6rem);
-    transition: color .3s linear;
+    font-size: clamp(2.125rem, 6vw, 7rem);
 }
 
 ::selection {
@@ -17,7 +26,7 @@ body {
 }
 
 .main {
-    line-height: 1;
+    line-height: 1.2;
     display: grid;
     gap: clamp(1rem, 5vw, 6rem);
     padding: 0 clamp(.5rem, 2vw, 1.5rem);
@@ -67,7 +76,7 @@ html.lenis, html.lenis body {
 
 .fold-content {
     display: grid;
-    gap: clamp(1rem, 5vw, 6rem);
+    gap: clamp(5rem, 20vw, 20rem);
 }
 
 .screen {
@@ -88,7 +97,7 @@ html.lenis, html.lenis body {
 .fold {
 	overflow: hidden;
 	width: 100vw;
-	height: 80vh;
+	height: var(--foldsHeight);
 	will-change: transform;
 }
 
@@ -104,14 +113,14 @@ html.lenis, html.lenis body {
 .fold-after {
 	position: absolute;
 	transform-origin: top center;
-	transform: translateZ(0px) translate3d(0, 80vh, 0) rotateX(120deg) scale3d(1, 1.002004008016032, 1);
+	transform: translateZ(0px) translate3d(0, var(--foldsHeight), 0) scaleY(3);
 	inset: 0 0 0 0;
 }
 
 .fold-before {
 	position: absolute;
 	transform-origin: bottom center;
-	transform: translateZ(0px) translate3d(0, -80vh, 0) rotateX(-120deg) scale3d(1, 1.002004008016032, 1);
+	transform: translateZ(0px) translate3d(0, calc(var(--foldsHeight) * -1), 0) scaleY(3);
     inset: 0 0 0 0;
 }
 
