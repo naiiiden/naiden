@@ -180,20 +180,30 @@ function appendMainCopyContent(scrollers) {
       const copyContent = mainCopyContent.cloneNode(true);
       copyContent.id = "";
       foldContent.append(copyContent);
+    } else {
+      const newFoldContent = document.createElement("div");
+      newFoldContent.classList.add("fold-content");
+      const copyContent = mainCopyContent.cloneNode(true);
+      copyContent.id = "";
+      newFoldContent.append(copyContent);
+      scroller.append(newFoldContent);
     }
   });
+
+  updateBodyHeight();
 }
 
-function tick() {
-  if (state.disposed) return;
-
+function updateBodyHeight() {
   const centerFold = folds[Math.floor(folds.length / 2)];
-
   document.body.style.height =
     scrollers[0].children[0].clientHeight -
     centerFold.clientHeight +
     window.innerHeight +
     "px";
+}
+
+function handleScroll() {
+  if (state.disposed) return;
 
   state.targetScroll = -(
     document.documentElement.scrollTop || document.body.scrollTop
@@ -209,14 +219,17 @@ function tick() {
     appendMainCopyContent(scrollers);
   }
 
-  addLinksHoverEffect();
-
-  requestAnimationFrame(tick);
+  requestAnimationFrame(handleScroll);
 }
 
 function init() {
   scrollers = setContent(baseContent);
-  tick();
+  updateBodyHeight();
+
+  window.addEventListener('scroll', handleScroll);
+
+  addLinksHoverEffect();
+  handleScroll();
 }
 init();
 
