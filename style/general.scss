@@ -21,7 +21,6 @@ body {
     display: grid;
     gap: clamp(1rem, 5vw, 6rem);
     padding: 0 clamp(.5rem, 2vw, 1.5rem);
-    mix-blend-mode: difference;
 
     span {
         font-size: larger;

@@ -133,99 +133,91 @@ function animate() {
 }
 animate();
 
-(function () {
-  const folds = Array.from(document.getElementsByClassName("fold"));
-  const baseContent = document.getElementById("base-content");
-  const mainCopyContent = document.querySelector(".main-copy");
+const state = {
+  disposed: false,
+  targetScroll: 0,
+  scroll: 0,
+};
 
-  let state = {
-    disposed: false,
-    targetScroll: 0,
-    scroll: 0,
-  };
+const folds = Array.from(document.getElementsByClassName("fold"));
+const baseContent = document.getElementById("base-content");
+const mainCopyContent = document.querySelector(".main-copy");
+let scrollers;
 
-  function lerp(current, target, speed = 0.1, limit = 0.001) {
-    let change = (target - current) * speed;
-    if (Math.abs(change) < limit) {
-      change = target - current;
-    }
-    return change;
-  }
+function lerp(current, target, speed = 0.1, limit = 0.001) {
+  const change = (target - current) * speed;
+  return Math.abs(change) < limit ? target - current : change;
+}
 
-  function setContent(baseContent) {
-    let scrollers = [];
+function setContent(baseContent) {
+  return folds.map(fold => {
+    const copyContent = baseContent.cloneNode(true);
+    copyContent.id = "";
 
-    for (let i = 0; i < folds.length; i++) {
-      const fold = folds[i];
-      const copyContent = baseContent.cloneNode(true);
-      copyContent.id = "";
-      let scroller;
+    const sizeFixEle = document.createElement("div");
+    sizeFixEle.classList.add("fold-size-fix");
 
-      let sizeFixEle = document.createElement("div");
-      sizeFixEle.classList.add("fold-size-fix");
+    const scroller = document.createElement("div");
+    scroller.classList.add("fold-scroller");
+    sizeFixEle.append(scroller);
+    fold.append(sizeFixEle);
 
-      scroller = document.createElement("div");
-      scroller.classList.add("fold-scroller");
-      sizeFixEle.append(scroller);
-      fold.append(sizeFixEle);
+    scroller.append(copyContent);
+    return scroller;
+  });
+}
 
-      scroller.append(copyContent);
-      scrollers[i] = scroller;
-    }
-    return scrollers;
-  }
+function updateStyles(scroll, scrollers) {
+  scrollers.forEach(scroller => {
+    scroller.children[0].style.transform = `translateY(${scroll}px)`;
+  });
+}
 
-  function updateStyles(scroll, scrollers) {
-    for (let i = 0; i < folds.length; i++) {
-      const scroller = scrollers[i];
-      scroller.children[0].style.transform = `translateY(${scroll}px)`;
-    }
-  }
-
-  function appendMainCopyContent(scrollers) {
-    for (let scroller of scrollers) {
-      const foldContent = scroller.querySelector(".fold-content");
+function appendMainCopyContent(scrollers) {
+  scrollers.forEach(scroller => {
+    const foldContent = scroller.querySelector(".fold-content");
+    if (foldContent) {
       const copyContent = mainCopyContent.cloneNode(true);
       copyContent.id = "";
       foldContent.append(copyContent);
     }
-  }
+  });
+}
 
-  let scrollers = setContent(baseContent);
+function tick() {
+  if (state.disposed) return;
 
   const centerFold = folds[Math.floor(folds.length / 2)];
-  let tick = () => {
-    if (state.disposed) return;
 
-    // Calculate the scroll based on how much the content is outside the centerFold
-    document.body.style.height =
-      scrollers[0].children[0].clientHeight -
-      centerFold.clientHeight +
-      window.innerHeight +
-      "px";
+  document.body.style.height =
+    scrollers[0].children[0].clientHeight -
+    centerFold.clientHeight +
+    window.innerHeight +
+    "px";
 
-    state.targetScroll = -(
-      document.documentElement.scrollTop || document.body.scrollTop
-    );
-    state.scroll += lerp(state.scroll, state.targetScroll, 0.1, 0.0001);
+  state.targetScroll = -(
+    document.documentElement.scrollTop || document.body.scrollTop
+  );
+  state.scroll += lerp(state.scroll, state.targetScroll, 0.1, 0.0001);
 
-    updateStyles(state.scroll, scrollers);
+  updateStyles(state.scroll, scrollers);
 
-    // Check if we have reached the end of the scrollable content
-    const scrollableHeight = scrollers[0].children[0].clientHeight;
-    const scrollPosition = -state.scroll + window.innerHeight;
+  const scrollableHeight = scrollers[0].children[0].clientHeight;
+  const scrollPosition = -state.scroll + window.innerHeight;
 
-    if (scrollPosition >= scrollableHeight - 100) {
-      // 100 pixels before the end
-      appendMainCopyContent(scrollers);
-    }
+  if (scrollPosition >= scrollableHeight - 100) {
+    appendMainCopyContent(scrollers);
+  }
 
-    requestAnimationFrame(tick);
-  };
+  requestAnimationFrame(tick);
+}
 
+function init() {
+  scrollers = setContent(baseContent);
   document.body.classList.remove("loading");
   tick();
-})();
+}
+init();
 
 document.querySelectorAll("a").forEach((a) => {
   a.addEventListener("mouseenter", function() {
