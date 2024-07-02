@@ -108,6 +108,10 @@ body {
   text-transform: uppercase;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .hovered {
   color: #f8f8f8;
   transition: color 0.3s ease-in;
