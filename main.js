@@ -82,7 +82,6 @@ function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
 
 window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
-  console.log(camera.aspect);
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
@@ -200,8 +199,6 @@ function updateBodyHeight() {
     centerFold.clientHeight +
     window.innerHeight +
     "px";
-
-  addLinksHoverEffect();
 }
 
 function handleScroll() {
@@ -230,18 +227,6 @@ function init() {
 
   window.addEventListener('scroll', handleScroll);
 
-  addLinksHoverEffect();
   handleScroll();
 }
 init();
-
-function addLinksHoverEffect() {
-  document.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("mouseenter", function() {
-      document.body.classList.add("hovered");
-    });
-    a.addEventListener("mouseleave", function() {
-      document.body.classList.remove("hovered");
-    });
-  });
-}
