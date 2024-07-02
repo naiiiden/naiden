@@ -217,8 +217,6 @@ function handleScroll() {
   if (scrollPosition >= scrollableHeight - 100) {
     appendMainCopyContent(scrollers);
   }
-
-  requestAnimationFrame(handleScroll);
 }
 
 function init() {
