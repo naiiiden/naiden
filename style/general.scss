@@ -6,7 +6,7 @@
 
 @media screen and (min-width: 1024px) {
     :root {
-        --foldsHeight: 65vh;
+        --foldsHeight: 61.3vh;
     } 
 }
 
@@ -18,7 +18,7 @@
 
 body {
     font-family: "PPNeueMontreal-Medium", Arial;
-    font-size: clamp(2.125rem, 6vw, 7rem);
+    font-size: clamp(2.125rem, 6vw, 7.25rem);
 }
 
 ::selection {
@@ -26,7 +26,7 @@ body {
 }
 
 .main {
-    line-height: 1.2;
+    line-height: 1.1;
     display: grid;
     gap: clamp(1rem, 5vw, 6rem);
     padding: 0 clamp(.5rem, 2vw, 1.5rem);
@@ -113,14 +113,14 @@ html.lenis, html.lenis body {
 .fold-after {
 	position: absolute;
 	transform-origin: top center;
-	transform: translateZ(0px) translate3d(0, var(--foldsHeight), 0) scaleY(3);
+	transform: translateZ(0px) translate3d(0, var(--foldsHeight), 0) scaleY(4);
 	inset: 0 0 0 0;
 }
 
 .fold-before {
 	position: absolute;
 	transform-origin: bottom center;
-	transform: translateZ(0px) translate3d(0, calc(var(--foldsHeight) * -1), 0) scaleY(3);
+	transform: translateZ(0px) translate3d(0, calc(var(--foldsHeight) * -1), 0) scaleY(4);
     inset: 0 0 0 0;
 }
 
