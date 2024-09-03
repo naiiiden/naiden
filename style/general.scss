@@ -1,15 +1,5 @@
 @import '../node_modules/naiden-css-reset/reset.scss';
 
-:root {
-    --foldsHeight: 70vh;
-}
-
-@media screen and (min-width: 1024px) {
-    :root {
-        --foldsHeight: 61.3vh;
-    } 
-}
-
 @font-face {
     font-family: "PPNeueMontreal-Medium";
     src: url("/PPNeueMontreal-Medium.otf");
@@ -72,62 +62,5 @@ html.lenis, html.lenis body {
 
 #threejs-container {
     position: fixed;
-}
-
-.fold-content {
-    display: grid;
-    gap: clamp(5rem, 20vw, 20rem);
-}
-
-.screen {
-	position: fixed;
-    inset: 0;
-	display: flex;
-	align-items: center;
-}
-
-.fold-size-fix {
-	height: 100%;
-}
-
-#base-content {
-	display: none;
-}
-
-.fold {
-	overflow: hidden;
-	width: 100vw;
-	height: var(--foldsHeight);
-	will-change: transform;
-}
-
-.wrapper-3d {
-	perspective: 250px;
-	transform-style: preserve-3d;
-}
-
-.fold-scroller {
-	height: 100%;
-}
-
-.fold-after {
-	position: absolute;
-	transform-origin: top center;
-	transform: translateZ(0px) translate3d(0, var(--foldsHeight), 0) scaleY(4);
-	inset: 0 0 0 0;
-}
-
-.fold-before {
-	position: absolute;
-	transform-origin: bottom center;
-	transform: translateZ(0px) translate3d(0, calc(var(--foldsHeight) * -1), 0) scaleY(4);
-    inset: 0 0 0 0;
-}
-
-.fold-after .fold-scroller {
-	transform: translateY(-100%);
-}
-
-.fold-before .fold-scroller {
-	transform: translateY(100%);
+    z-index: -1;
 }
