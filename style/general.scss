@@ -7,7 +7,7 @@
 }
 
 body {
-    font-family: "PPNeueMontreal-Book", Arial;
+    font-family: "PPNeueMontreal-Medium", Arial;
 }
 
 ::selection {
@@ -36,7 +36,6 @@ a {
         border: 2px solid #000;
         padding: .375rem clamp(1rem, 2vw, 2rem);
         border-radius: clamp(20px, 10vw, 99px);
-        position: relative;
 
         &:is(:hover, :focus-visible, :active) {
             border-radius: 0;
