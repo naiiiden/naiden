@@ -7,7 +7,7 @@
 }
 
 body {
-    font-family: "PPNeueMontreal-Medium", Arial;
+    font-family: "PPNeueMontreal-Book", Arial;
 }
 
 ::selection {
@@ -19,7 +19,7 @@ body {
     display: grid;
     gap: clamp(1.5rem, 2.5vw, 2.5rem);
     padding: 1rem;
-    font-size: clamp(1.125rem, 2.5vw, 1.875rem);
+    font-size: clamp(1.25rem, 2.5vw, 1.875rem);
     max-width: 56rem;
 }
 
