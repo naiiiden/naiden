@@ -8,7 +8,6 @@
 
 body {
     font-family: "PPNeueMontreal-Medium", Arial;
-    font-size: clamp(2.125rem, 6vw, 7.25rem);
 }
 
 ::selection {
@@ -18,13 +17,9 @@ body {
 .main {
     line-height: 1.1;
     display: grid;
-    gap: clamp(1rem, 5vw, 6rem);
-    padding: 0 clamp(.5rem, 2vw, 1.5rem);
-
-    span {
-        font-size: larger;
-        text-transform: uppercase;
-    }
+    gap: clamp(1.5rem, 2.5vw, 3rem);
+    padding: 1rem;
+    font-size: clamp(1.25rem, 2.5vw, 3rem);
 }
 
 ::-webkit-scrollbar {
