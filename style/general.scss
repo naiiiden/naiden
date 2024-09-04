@@ -15,11 +15,12 @@ body {
 }
 
 .main {
-    line-height: 1.1;
+    line-height: 1.25;
     display: grid;
-    gap: clamp(1.5rem, 2.5vw, 3rem);
+    gap: clamp(1.5rem, 2.5vw, 2.5rem);
     padding: 1rem;
-    font-size: clamp(1.25rem, 2.5vw, 3rem);
+    font-size: clamp(1.125rem, 2.5vw, 1.875rem);
+    max-width: 56rem;
 }
 
 ::-webkit-scrollbar {
@@ -27,7 +28,21 @@ body {
 }
 
 a {
+    display: inline-block;
     cursor: crosshair;
+    
+    &:is(li a) {
+        margin-bottom: .5rem;
+        border: 2px solid #000;
+        padding: .375rem clamp(1rem, 2vw, 2rem);
+        border-radius: clamp(20px, 10vw, 99px);
+        position: relative;
+
+        &:is(:hover, :focus-visible, :active) {
+            border-radius: 0;
+            transition: border-radius .3s;
+        }
+    }
 
     &:is(:hover, :focus-visible, :active) {
         outline: 0;
