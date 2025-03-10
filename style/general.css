@@ -130,4 +130,8 @@ a:is(:hover, :focus-visible, :active) {
 #threejs-container {
   position: fixed;
   z-index: -1;
+}
+
+.mirrored {
+  transform: scaleY(-1);
 }/*# sourceMappingURL=general.css.map */

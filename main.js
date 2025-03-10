@@ -121,3 +121,13 @@ function animate() {
   renderer.render(scene, camera);
 }
 animate();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const bodyContent = document.body.cloneNode(true);
+  const mirroredContainer = document.createElement("div");
+  
+  mirroredContainer.appendChild(bodyContent);
+  mirroredContainer.classList.add("mirrored");
+
+  document.body.appendChild(mirroredContainer);
+});

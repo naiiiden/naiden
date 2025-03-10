@@ -53,3 +53,7 @@ a {
     position: fixed;
     z-index: -1;
 }
+
+.mirrored {
+    transform: scaleY(-1);
+}
