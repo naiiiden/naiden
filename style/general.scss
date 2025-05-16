@@ -1,59 +1,47 @@
-@import '../node_modules/naiden-css-reset/reset.scss';
+@import "../node_modules/naiden-css-reset/reset.scss";
 
 @font-face {
-    font-family: "PPNeueMontreal-Medium";
-    src: url("/PPNeueMontreal-Medium.otf");
-    font-display: swap;
+  font-family: "PPNeueMontreal-Medium";
+  src: url("/PPNeueMontreal-Medium.otf");
+  font-display: swap;
 }
 
 body {
-    font-family: "PPNeueMontreal-Medium", Arial;
+  font-family: "PPNeueMontreal-Medium", Arial;
+  background: #000;
+  color: #fff;
 }
 
 ::selection {
-    color: #18ff33 !important;
+  color: #18ff33 !important;
 }
 
 .main {
-    line-height: 1.25;
-    display: grid;
-    gap: clamp(1.5rem, 2.5vw, 2.5rem);
-    padding: 1rem;
-    font-size: clamp(1.25rem, 2.5vw, 1.875rem);
-    max-width: 56rem;
-}
-
-::-webkit-scrollbar {
-    display: none;
+  line-height: 1;
+  display: grid;
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  padding: 1rem;
+  font-size: 6.66vw;
 }
 
 a {
-    display: inline-block;
-    cursor: crosshair;
-    
-    &:is(li a) {
-        margin-bottom: .5rem;
-        border: 2px solid #000;
-        padding: .375rem clamp(1rem, 2vw, 2rem);
-        border-radius: clamp(20px, 10vw, 99px);
+  display: inline-block;
+  cursor: crosshair;
 
-        &:is(:hover, :focus-visible, :active) {
-            border-radius: 0;
-            transition: border-radius .3s;
-        }
-    }
+  &:is(li a) {
+    margin-bottom: 0.5rem;
+    border: 2px solid #fff;
+    padding: 0.375rem clamp(1rem, 2vw, 2rem);
+    border-radius: clamp(20px, 10vw, 99px);
 
     &:is(:hover, :focus-visible, :active) {
-        outline: 0;
-        color: #18ff33 !important;
+      border-radius: 0;
+      transition: border-radius 0.3s;
     }
-}
+  }
 
-#threejs-container {
-    position: fixed;
-    z-index: -1;
-}
-
-.mirrored {
-    transform: scaleY(-1);
+  &:is(:hover, :focus-visible, :active) {
+    outline: 0;
+    color: #18ff33 !important;
+  }
 }
