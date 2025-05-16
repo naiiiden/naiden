@@ -18,7 +18,7 @@ camera.position.set(0, 1, 1);
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-const effect = new AsciiEffect(renderer, " .:-+*=", { invert: true });
+const effect = new AsciiEffect(renderer, " ;:.@!", { invert: true });
 effect.setSize(window.innerWidth, window.innerHeight);
 effect.domElement.style.color = "#888";
 effect.domElement.style.backgroundColor = "black";
