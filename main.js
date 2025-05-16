@@ -20,7 +20,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 const effect = new AsciiEffect(renderer, " .:-+*=", { invert: true });
 effect.setSize(window.innerWidth, window.innerHeight);
-effect.domElement.style.color = "white";
+effect.domElement.style.color = "#888";
 effect.domElement.style.backgroundColor = "black";
 container.appendChild(effect.domElement);
 
@@ -35,7 +35,7 @@ let model;
 
 const loader = new GLTFLoader();
 loader.load(
-  "untitledcompressed.glb",
+  "naiden.glb",
   (gltf) => {
     model = gltf.scene;
     model.traverse((node) => {
@@ -44,9 +44,6 @@ loader.load(
         node.receiveShadow = true;
         node.material = new THREE.MeshStandardMaterial({
           color: 0xffffff,
-          metalness: 0,
-          roughness: 0.5,
-          opacity: 0.7,
           side: THREE.DoubleSide,
         });
       }
