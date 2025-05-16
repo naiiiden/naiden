@@ -17,12 +17,15 @@ body {
 }
 
 main {
-  line-height: 1;
+  line-height: .8;
+  letter-spacing: -.125rem;
   display: grid;
   gap: clamp(1.5rem, 8vw, 20rem);
-  padding: 1rem;
+  padding: .25rem;
   font-size: 8vw;
-  font-weight: 700;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-align: justify;
 }
 
 a {
