@@ -37,3 +37,8 @@ a {
     color: #18ff33 !important;
   }
 }
+
+#threejs-container {
+  position: fixed;
+  z-index: -1;
+}
