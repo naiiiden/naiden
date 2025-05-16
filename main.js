@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { RGBELoader } from "three/examples/jsm/Addons.js";
 import { AsciiEffect } from "three/examples/jsm/Addons.js";
 
 const container = document.getElementById("threejs-container");
@@ -19,50 +18,52 @@ camera.position.set(0, 1, 1);
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-const effect = new AsciiEffect(renderer, ' .:-+*=', { invert: true });
+const effect = new AsciiEffect(renderer, " .:-+*=", { invert: true });
 effect.setSize(window.innerWidth, window.innerHeight);
-effect.domElement.style.color = 'white';
-effect.domElement.style.backgroundColor = 'black';
+effect.domElement.style.color = "white";
+effect.domElement.style.backgroundColor = "black";
 container.appendChild(effect.domElement);
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(5, 10, 7.5);
+scene.add(directionalLight);
 
 let model;
 
-new RGBELoader().load("texture.hdr", (texture) => {
-  texture.mapping = THREE.EquirectangularReflectionMapping;
-  scene.environment = texture;
+const loader = new GLTFLoader();
+loader.load(
+  "untitledcompressed.glb",
+  (gltf) => {
+    model = gltf.scene;
+    model.traverse((node) => {
+      if (node.isMesh) {
+        node.castShadow = true;
+        node.receiveShadow = true;
+        node.material = new THREE.MeshStandardMaterial({
+          color: 0xffffff,
+          metalness: 0,
+          roughness: 0.5,
+          opacity: 0.7,
+          side: THREE.DoubleSide,
+        });
+      }
+    });
 
-  const loader = new GLTFLoader();
-  loader.load(
-    "untitledcompressed.glb",
-    (gltf) => {
-      model = gltf.scene;
-      model.traverse((node) => {
-        if (node.isMesh) {
-          node.castShadow = true;
-          node.receiveShadow = true;
-          node.material = new THREE.MeshStandardMaterial({
-            metalness: 0,
-            roughness: 0,
-            transparent: true,
-            opacity: 0.7,
-            side: THREE.DoubleSide,
-          });
-        }
-      });
+    const box = new THREE.Box3().setFromObject(model);
+    const boxSize = box.getSize(new THREE.Vector3()).length();
+    const boxCenter = box.getCenter(new THREE.Vector3());
 
-      const box = new THREE.Box3().setFromObject(model);
-      const boxSize = box.getSize(new THREE.Vector3()).length();
-      const boxCenter = box.getCenter(new THREE.Vector3());
-
-      frameArea(boxSize * 0.5, boxSize, boxCenter, camera);
-      scene.add(model);
-    },
-    undefined,
-    (error) => {
-      console.error(error);
-    }
-  );
-});
+    frameArea(boxSize * 0.5, boxSize, boxCenter, camera);
+    scene.add(model);
+  },
+  undefined,
+  (error) => {
+    console.error(error);
+  }
+);
 
 function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
   const halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5;
