@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { AsciiEffect } from "three/examples/jsm/Addons.js";
+import { EffectComposer, RenderPass, EffectPass } from "postprocessing";
+import { ASCIIEffect } from "./ascii";
 
 const container = document.getElementById("threejs-container");
 
@@ -17,12 +18,21 @@ camera.position.set(0, 1, 1);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
+container.appendChild(renderer.domElement);
 
-const effect = new AsciiEffect(renderer, " ;:.@!", { invert: true });
-effect.setSize(window.innerWidth, window.innerHeight);
-effect.domElement.style.color = "#888";
-effect.domElement.style.backgroundColor = "black";
-container.appendChild(effect.domElement);
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+
+const asciiEffect = new ASCIIEffect({
+  characters: ' 10@,! ',
+  fontSize: 64,
+  cellSize: 12,
+  color: '#999',
+  invert: true
+});
+
+const effectPass = new EffectPass(camera, asciiEffect);
+composer.addPass(effectPass);
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 scene.add(ambientLight);
@@ -81,7 +91,7 @@ window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  effect.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
 });
 
 let targetRotation = new THREE.Vector2();
@@ -120,6 +130,6 @@ function animate() {
     model.rotation.y = currentRotation.y;
   }
 
-  effect.render(scene, camera);
+  composer.render();
 }
 animate();
