@@ -51,7 +51,6 @@ document.addEventListener("mouseleave", () => {
 const container = document.getElementById("threejs-container");
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x000000);
 
 const camera = new THREE.PerspectiveCamera(
   75,

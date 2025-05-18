@@ -34,7 +34,7 @@ body {
 
 ::selection {
   color: #18ff33 !important;
-  background: #fe0074;
+  // background: #fe0074;
 }
 
 main {
@@ -65,7 +65,15 @@ main {
 a {
   display: inline-block;
   width: 100%;
+
+  &:is(p a) {
+    margin: 1rem 0;
+  }
   
+  span {
+    font-weight: 400;
+  }
+
   &:is(:hover, :focus-visible, :active) {
     outline: 0;
     color: #18ff33 !important;
