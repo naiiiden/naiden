@@ -37,20 +37,21 @@ body {
 }
 
 main {
-  line-height: .8;
-  letter-spacing: -.125rem;
+  line-height: .9;
+  letter-spacing: -.375rem;
   display: grid;
   gap: clamp(1.5rem, 8vw, 20rem);
-  padding: .25rem;
-  font-size: 8vw;
+  font-size: 5vw;
   font-weight: 400;
-  text-transform: uppercase;
-  text-align: justify;
+
+  b {
+    font-size: 5.25vw;
+  }
 }
 
 a {
   display: inline-block;
-
+  
   &:is(:hover, :focus-visible, :active) {
     outline: 0;
     color: #18ff33 !important;
