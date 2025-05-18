@@ -4,6 +4,7 @@ import { EffectComposer, RenderPass, EffectPass } from "postprocessing";
 import { ASCIIEffect } from "./ascii";
 
 let cursor = document.querySelector('.cursor');
+let cursorLink = document.querySelector('.cursor-link');
 
 function cursorPosition(cursorElement, xPosSubstractValue, yPosSubstractValue) {
   document.addEventListener('mousemove', (e) => {
@@ -13,6 +14,19 @@ function cursorPosition(cursorElement, xPosSubstractValue, yPosSubstractValue) {
 }
 
 cursorPosition(cursor, 3.5, 3.5);
+cursorPosition(cursorLink, 14.5, 3.5);
+
+cursorLink.style.display = "none";
+
+document.addEventListener("mouseover", (event) => {
+  if (event.target.closest("a")) {
+    cursor.style.display = "none";
+    cursorLink.style.display = "block";
+  } else {
+    cursor.style.display = "block";
+    cursorLink.style.display = "none";
+  }
+});
 
 const container = document.getElementById("threejs-container");
 

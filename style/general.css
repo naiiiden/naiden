@@ -91,16 +91,22 @@ body {
 
 @media (pointer: fine) {
   * {
-    cursor: none;
+    cursor: none !important;
   }
-  .cursor {
+  .cursor, .cursor-link {
     position: fixed;
-    left: -2rem;
     pointer-events: none;
     z-index: 9999;
+  }
+  .cursor.cursor, .cursor-link.cursor {
     background: url("../public/bitmap.png");
     width: 29px;
     height: 45px;
+  }
+  .cursor.cursor-link, .cursor-link.cursor-link {
+    background: url("../public/bitmap2.png");
+    width: 40px;
+    height: 47px;
   }
 }
 ::-moz-selection {
@@ -124,7 +130,6 @@ main {
 
 a {
   display: inline-block;
-  cursor: url(../public/bitmap2.png), auto;
 }
 a:is(:hover, :focus-visible, :active) {
   outline: 0;
