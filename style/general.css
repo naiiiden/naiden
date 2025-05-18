@@ -90,9 +90,6 @@ body {
 }
 
 @media (pointer: fine) {
-  * {
-    cursor: none !important;
-  }
   .cursor, .cursor-link {
     position: fixed;
     pointer-events: none;
