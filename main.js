@@ -3,6 +3,17 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { EffectComposer, RenderPass, EffectPass } from "postprocessing";
 import { ASCIIEffect } from "./ascii";
 
+let cursor = document.querySelector('.cursor');
+
+function cursorPosition(cursorElement, xPosSubstractValue, yPosSubstractValue) {
+  document.addEventListener('mousemove', (e) => {
+    cursorElement.style.left = e.clientX - xPosSubstractValue + 'px';
+    cursorElement.style.top = e.clientY - yPosSubstractValue + 'px';
+  });
+}
+
+cursorPosition(cursor, 3.5, 3.5);
+
 const container = document.getElementById("threejs-container");
 
 const scene = new THREE.Scene();

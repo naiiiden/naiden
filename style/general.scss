@@ -10,7 +10,23 @@ body {
   font-family: "Overused Grotesk", Arial;
   background: #000;
   color: #fff;
-  cursor: url(../public/bitmap.png), auto;
+}
+
+@media (pointer: fine) {
+  * {
+    cursor: none;
+  }
+
+  .cursor {
+    position: fixed;
+    // top: -2rem;
+    left: -2rem;
+    pointer-events: none;
+    z-index: 9999;
+    background: url("../public/bitmap.png");
+    width: 29px;
+    height: 45px;
+  }
 }
 
 ::selection {
