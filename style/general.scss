@@ -34,27 +34,52 @@ body {
 
 ::selection {
   color: #18ff33 !important;
+  background: #fe0074;
 }
 
 main {
-  line-height: .9;
-  letter-spacing: -.375rem;
+  line-height: .95;
   display: grid;
+  padding: 0 .25rem;
   gap: clamp(1.5rem, 8vw, 20rem);
   font-size: 5vw;
   font-weight: 400;
 
+  @media screen and (min-width: 64rem) {
+    letter-spacing: -.125rem;
+  }
+
+  @media screen and (min-width: 90rem) {
+    letter-spacing: -.25rem;
+  }
+
   b {
     font-size: 5.25vw;
+
+    span {
+      word-spacing: -5px;
+    }
   }
 }
 
 a {
   display: inline-block;
+  width: 100%;
   
   &:is(:hover, :focus-visible, :active) {
     outline: 0;
     color: #18ff33 !important;
+    position: relative;
+
+    &::after {
+      content: "";
+      background: #fe0074;
+      position: absolute;
+      inset: 0;
+      margin: 0 -.25rem;
+      z-index: -1;
+      filter: blur(1px);
+    }
   }
 }
 
