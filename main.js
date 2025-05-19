@@ -21,7 +21,7 @@ cursorPosition(cursorLink, 14.5, 3.5);
 cursorLink.style.display = "none";
 
 document.querySelectorAll("body, body a").forEach((el) => {
-  el.style.cursor = "url('../public/bitmap.png'), auto";
+  el.style.cursor = "url('bitmap.png'), auto";
 });
 
 function handleFirstMouseMove(e) {
