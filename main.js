@@ -119,7 +119,7 @@ loader.load(
 function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
   const halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5;
   const halfFovY = THREE.MathUtils.degToRad(camera.fov * 0.5);
-  const distance = halfSizeToFitOnScreen / Math.tan(halfFovY);
+  const distance = halfSizeToFitOnScreen / Math.tan(halfFovY) * 0.9;
 
   const direction = new THREE.Vector3()
     .subVectors(camera.position, boxCenter)

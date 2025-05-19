@@ -54,8 +54,6 @@ main {
   }
 
   b {
-    font-size: 5.25vw;
-
     span {
       word-spacing: -5px;
     }
@@ -67,7 +65,7 @@ a {
   width: 100%;
 
   &:is(p a) {
-    margin: 1rem 0;
+    margin: 2rem 0;
   }
   
   span {

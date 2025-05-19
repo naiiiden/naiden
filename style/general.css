@@ -131,9 +131,6 @@ main {
     letter-spacing: -0.25rem;
   }
 }
-main b {
-  font-size: 5.25vw;
-}
 main b span {
   word-spacing: -5px;
 }
@@ -143,7 +140,7 @@ a {
   width: 100%;
 }
 a:is(p a) {
-  margin: 1rem 0;
+  margin: 2rem 0;
 }
 a span {
   font-weight: 400;
