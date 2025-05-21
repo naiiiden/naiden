@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { EffectComposer, RenderPass, EffectPass } from "postprocessing";
-import { ASCIIEffect } from "./ascii";
+import { AsciiEffect } from "three/examples/jsm/effects/AsciiEffect.js";
 
 let cursor = document.querySelector('.cursor');
 let cursorLink = document.querySelector('.cursor-link');
@@ -21,7 +20,7 @@ cursorPosition(cursorLink, 14.5, 3.5);
 cursorLink.style.display = "none";
 
 document.querySelectorAll("body, body a").forEach((el) => {
-  el.style.cursor = "url('bitmap.png'), auto";
+  el.style.cursor = "url('../public/bitmap.png'), auto";
 });
 
 function handleFirstMouseMove(e) {
@@ -51,6 +50,7 @@ document.addEventListener("mouseleave", () => {
 const container = document.getElementById("threejs-container");
 
 const scene = new THREE.Scene();
+scene.background = null;
 
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -62,21 +62,12 @@ camera.position.set(0, 1, 1);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
-container.appendChild(renderer.domElement);
 
-const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
+const effect = new AsciiEffect(renderer, ' .:-+*=%@ ', { invert: true });
+effect.setSize(window.innerWidth, window.innerHeight);
+effect.domElement.style.color = '#fff';
 
-const asciiEffect = new ASCIIEffect({
-  characters: ' 10@,! ',
-  fontSize: 64,
-  cellSize: 12,
-  color: '#999',
-  invert: true
-});
-
-const effectPass = new EffectPass(camera, asciiEffect);
-composer.addPass(effectPass);
+container.appendChild(effect.domElement);
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 scene.add(ambientLight);
@@ -103,6 +94,8 @@ loader.load(
       }
     });
 
+    model.scale.set(1.5, 1.5, 1.5); // Make model look bigger
+
     const box = new THREE.Box3().setFromObject(model);
     const boxSize = box.getSize(new THREE.Vector3()).length();
     const boxCenter = box.getCenter(new THREE.Vector3());
@@ -119,7 +112,7 @@ loader.load(
 function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
   const halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5;
   const halfFovY = THREE.MathUtils.degToRad(camera.fov * 0.5);
-  const distance = halfSizeToFitOnScreen / Math.tan(halfFovY) * 0.9;
+  const distance = (halfSizeToFitOnScreen / Math.tan(halfFovY)); // Move camera a bit closer
 
   const direction = new THREE.Vector3()
     .subVectors(camera.position, boxCenter)
@@ -135,7 +128,7 @@ window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  composer.setSize(window.innerWidth, window.innerHeight);
+  effect.setSize(window.innerWidth, window.innerHeight);
 });
 
 let targetRotation = new THREE.Vector2();
@@ -174,6 +167,6 @@ function animate() {
     model.rotation.y = currentRotation.y;
   }
 
-  composer.render();
+  effect.render(scene, camera);
 }
 animate();
