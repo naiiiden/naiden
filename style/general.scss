@@ -8,8 +8,6 @@
 
 body {
   font-family: "Overused Grotesk", Arial;
-  background: #000;
-  color: #fff;
 }
 
 @media (pointer: fine) {
@@ -42,7 +40,7 @@ main {
   display: grid;
   padding: 0 .25rem;
   gap: clamp(1.5rem, 8vw, 20rem);
-  font-size: 4vw;
+  font-size: 5vw;
   font-weight: 400;
 
   @media screen and (min-width: 64rem) {
@@ -52,12 +50,6 @@ main {
   @media screen and (min-width: 90rem) {
     letter-spacing: -.25rem;
   }
-
-  b {
-    span {
-      word-spacing: -5px;
-    }
-  }
 }
 
 a {
@@ -66,10 +58,6 @@ a {
 
   &:is(p a) {
     margin: 2rem 0;
-  }
-  
-  span {
-    font-weight: 400;
   }
 
   &:is(:hover, :focus-visible, :active) {

@@ -20,7 +20,7 @@ cursorPosition(cursorLink, 14.5, 3.5);
 cursorLink.style.display = "none";
 
 document.querySelectorAll("body, body a").forEach((el) => {
-  el.style.cursor = "url('../public/bitmap.png'), auto";
+  el.style.cursor = "url('bitmap.png'), auto";
 });
 
 function handleFirstMouseMove(e) {
@@ -63,9 +63,9 @@ camera.position.set(0, 1, 1);
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-const effect = new AsciiEffect(renderer, ' .:-+*=%@ ', { invert: true });
+const effect = new AsciiEffect(renderer, ' .:-+.#&@ ', { invert: true, resolution: .1 });
 effect.setSize(window.innerWidth, window.innerHeight);
-effect.domElement.style.color = '#fff';
+effect.domElement.style.color = '#000';
 
 container.appendChild(effect.domElement);
 
@@ -94,8 +94,6 @@ loader.load(
       }
     });
 
-    model.scale.set(1.5, 1.5, 1.5); // Make model look bigger
-
     const box = new THREE.Box3().setFromObject(model);
     const boxSize = box.getSize(new THREE.Vector3()).length();
     const boxCenter = box.getCenter(new THREE.Vector3());
@@ -112,7 +110,7 @@ loader.load(
 function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
   const halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5;
   const halfFovY = THREE.MathUtils.degToRad(camera.fov * 0.5);
-  const distance = (halfSizeToFitOnScreen / Math.tan(halfFovY)); // Move camera a bit closer
+  const distance = (halfSizeToFitOnScreen / Math.tan(halfFovY)) * 0.9;
 
   const direction = new THREE.Vector3()
     .subVectors(camera.position, boxCenter)
