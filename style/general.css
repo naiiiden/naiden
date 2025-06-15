@@ -78,13 +78,8 @@ html {
     scroll-behavior: auto !important;
   }
 }
-@font-face {
-  font-family: "Overused Grotesk";
-  src: url("/OverusedGrotesk-VF.ttf");
-  font-display: swap;
-}
 body {
-  font-family: "Overused Grotesk", Arial;
+  font-family: Arial;
 }
 
 @media (pointer: fine) {
@@ -114,44 +109,20 @@ body {
 .grid {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: repeat(2, 95vw);
-  grid-template-rows: repeat(2, 95vh);
 }
 
 .main {
-  border-radius: 1rem;
-  line-height: 1.95;
-  font-size: 1.25rem;
-  font-weight: 400;
+  line-height: 1.125;
+  font-size: 3vw;
   text-transform: uppercase;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
 }
 .main:nth-child(2) {
-  transform: scale(-1, 1);
-}
-.main:nth-child(3) {
-  transform: scale(1, -1);
-}
-.main:nth-child(4) {
   transform: scale(-1, -1);
 }
 
-a {
-  word-break: break-all;
-}
 a:is(:hover, :focus-visible, :active) {
   outline: 0;
   color: #18ff33;
-}
-
-@media screen and (width > 64rem) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: unset;
-  }
-  .main {
-    font-size: 1.5vw;
-  }
+  font-style: italic;
+  text-decoration: underline;
 }/*# sourceMappingURL=general.css.map */
