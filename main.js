@@ -42,3 +42,11 @@ document.addEventListener("mouseleave", () => {
   cursor.style.display = "none";
   cursorLink.style.display = "none";
 });
+
+main2.addEventListener("mouseenter", () => {
+  main1.classList.add("mirror");
+});
+
+main2.addEventListener("mouseleave", () => {
+  main1.classList.remove("mirror");
+});

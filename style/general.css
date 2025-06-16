@@ -129,6 +129,19 @@ h1 {
 .main:nth-child(2) {
   transform: scale(-1, -1);
 }
+.main:nth-child(2):hover {
+  transform: unset;
+  text-align: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.main.mirror {
+  transform: scale(1, -1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
 a:is(:hover, :focus-visible, :active) {
   outline: 0;
