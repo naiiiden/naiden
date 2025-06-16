@@ -111,6 +111,11 @@ body {
   display: grid;
 }
 
+h1 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
 .main {
   line-height: 1.125;
   font-size: 4vw;
