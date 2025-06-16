@@ -113,8 +113,13 @@ body {
 
 .main {
   line-height: 1.125;
-  font-size: 3vw;
+  font-size: 4vw;
   text-transform: uppercase;
+}
+@media screen and (min-width: 64rem) {
+  .main {
+    font-size: 3vw;
+  }
 }
 .main:nth-child(2) {
   transform: scale(-1, -1);
