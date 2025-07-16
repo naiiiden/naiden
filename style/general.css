@@ -80,6 +80,7 @@ html {
 }
 body {
   font-family: Arial;
+  min-height: 100svh;
 }
 
 @media (pointer: fine) {
@@ -107,7 +108,7 @@ body {
 }
 
 .grid {
-  min-height: 100vh;
+  min-height: 100svh;
   display: grid;
 }
 
